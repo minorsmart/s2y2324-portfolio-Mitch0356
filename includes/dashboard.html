@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Plantcontrol Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="webpage.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+    body {
+        font-family: 'Quicksand', sans-serif;
+        background: linear-gradient(to top right, #7c89d5, #f599a5);
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .progress-container {
+        height: 100%;
+        /* Ensure the container takes up full height of the column */
+        display: flex;
+        align-items: flex-end;
+        /* Align the progress bar to the bottom */
+
+    }
+
+    .progress-bar {
+        position: relative;
+        height: 0;
+        width: 100%;
+        border-radius: 10px;
+        /* Rounded corners */
+        transition: height 0.3s, background-color 0.3s;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+    .progress-text {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        /* Text color */
+    }
+
+
+
+    .custom-bg {
+        background-color: #f4f4f4 !important;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 20px 0 rgba(0, 0, 0, 0.01) !important;
+    }
+
+    .backdrop {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    }
+
+    .custom-block {
+        background-color: #353839 !important;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    }
+
+    .toggle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Style for the switch input */
+    .toggle-input {
+        display: none;
+        /* Hide the default checkbox */
+    }
+
+    /* Style for the switch track */
+    .toggle-track {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        background-color: red;
+        /* Default color for off state */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        /* Added box-shadow transition */
+    }
+
+    /* Style for the switch thumb (the moving part) */
+    .toggle-thumb {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    /* Move the thumb to the right when the input is checked */
+    .toggle-input:checked+.toggle-track {
+        background-color: green;
+        /* Color for on state */
+        box-shadow: none;
+        /* Reset box-shadow in on state */
+    }
+
+    .toggle-input:checked+.toggle-track .toggle-thumb {
+        transform: translateX(20px) translateY(-50%);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .status-circle {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-left: auto;
+        background-color: #28a745;
+        transform: translateY(-50%);
+    }
+
+    .status-danger {
+        background-color: #dc3545;
+    }
+</style>
+
+<script>
+    function move() {
+        var elem = document.getElementById("myBar");
+        var progressText = document.getElementById("progressText");
+        var height = 0;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (height == 100) {
+                clearInterval(id);
+            } else {
+                height++;
+                elem.style.height = height + "%";
+                updateColor(height);
+                progressText.innerHTML = height + "%"; // Update the progress text
+            }
+        }
+    }
+
+    function setProgress(percent) {
+        var elem = document.getElementById("myBar");
+        var progressText = document.getElementById("progressText");
+        elem.style.height = percent + "%";
+        updateColor(percent);
+        progressText.innerHTML = percent + "%"; // Update the progress text
+    }
+
+    function updateColor(percent) {
+        var elem = document.getElementById("myBar");
+        var isHappy = document.getElementById("status");
+        if (percent <= 25) {
+            elem.style.backgroundColor = "#FF0000"; // Red
+            isHappy.innerHTML = "💀";
+        } else if (percent <= 75) {
+            elem.style.backgroundColor = "#FFA500"; // Orange
+            isHappy.innerHTML = "🫤";
+        } else {
+            elem.style.backgroundColor = "#4CAF50"; // Green
+            isHappy.innerHTML = "😃";
+
+        }
+    }
+
+    // Example: Set progress to 50% after 3 seconds
+    setTimeout(function () {
+        setProgress(50);
+    }, 3000);
+
+    // Example: Set progress to 80% after 6 seconds
+    setTimeout(function () {
+        setProgress(80);
+    }, 6000);
+
+</script>
+
+<body>
+    <header>
+    </header>
+    <main>
+        <div class="mt-5 container bg-light rounded rounded-3 backdrop">
+            <div class="container p-4">
+                <h1 class="text-center">Plantcontrol Dashboard</h1>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="container p-3 custom-bg rounded rounded-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="75px" height="75px"
+                                                    fill="currentColor" class="bi bi-thermometer-half"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V6.5a.5.5 0 0 1 1 0v4.585a1.5 1.5 0 0 1 1 1.415" />
+                                                    <path
+                                                        d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1" />
+                                                </svg>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row justify-content-center align-items-center g-2">
+                                                    <div class="col-md-12">
+                                                        <h6><strong>Temperatuur:</strong></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-center align-items-center g-2">
+                                                    <div
+                                                        class="col-md-12 custom-block text-white rounded rounded-3 p-1">
+                                                        <p class="display-6 text-center p-o m-0">25 <span>&#8451;</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="75px" height="75px"
+                                                    fill="currentColor" class="bi bi-moisture" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M13.5 0a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V7.5h-1.5a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V15h-1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V.5a.5.5 0 0 0-.5-.5zM7 1.5l.364-.343a.5.5 0 0 0-.728 0l-.002.002-.006.007-.022.023-.08.088a29 29 0 0 0-1.274 1.517c-.769.983-1.714 2.325-2.385 3.727C2.368 7.564 2 8.682 2 9.733 2 12.614 4.212 15 7 15s5-2.386 5-5.267c0-1.05-.368-2.169-.867-3.212-.671-1.402-1.616-2.744-2.385-3.727a29 29 0 0 0-1.354-1.605l-.022-.023-.006-.007-.002-.001zm0 0-.364-.343zm-.016.766L7 2.247l.016.019c.24.274.572.667.944 1.144.611.781 1.32 1.776 1.901 2.827H4.14c.58-1.051 1.29-2.046 1.9-2.827.373-.477.706-.87.945-1.144zM3 9.733c0-.755.244-1.612.638-2.496h6.724c.395.884.638 1.741.638 2.496C11 12.117 9.182 14 7 14s-4-1.883-4-4.267" />
+                                                </svg>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row justify-content-center align-items-center g-2">
+                                                    <div class="col-md-12">
+                                                        <h6><strong>Luchtvochtigheid:</strong></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-center align-items-center g-2">
+                                                    <div
+                                                        class="col-md-12 custom-block text-white rounded rounded-3 p-1">
+                                                        <p class="display-6 text-center p-o m-0">50%</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container mt-3 p-3 custom-bg rounded rounded-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="75px" height="75px"
+                                            fill="currentColor" class="bi bi-lightning-charge" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z" />
+                                        </svg>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="text-center"><strong>Relais</strong></h4>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-2">
+                                                <div class="col-md-6">
+                                                    <h6 class="text-center"><strong>Status:</strong></h6>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h6 class="text-center"><strong>Zet aan/uit</strong></h6>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-2">
+                                                <div class="col-md-6">
+                                                    <h6
+                                                        class="text-center text-danger custom-block rounded rounded-3 p-1 ">
+                                                        <strong>Uit</strong>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="text-center toggle-container">
+                                                        <form>
+                                                            <input type="checkbox" class="toggle-input"
+                                                                id="toggle-switch">
+                                                            <label for="toggle-switch" class="toggle-track">
+                                                                <div class="toggle-thumb"></div>
+                                                            </label>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container mt-3 p-3 custom-bg rounded rounded-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="75px" height="75px"
+                                            fill="currentColor" class="bi bi-plug" viewBox="0 0 16 16">
+                                            <path
+                                                d="M6 0a.5.5 0 0 1 .5.5V3h3V.5a.5.5 0 0 1 1 0V3h1a.5.5 0 0 1 .5.5v3A3.5 3.5 0 0 1 8.5 10c-.002.434-.01.845-.04 1.22-.041.514-.126 1.003-.317 1.424a2.08 2.08 0 0 1-.97 1.028C6.725 13.9 6.169 14 5.5 14c-.998 0-1.61.33-1.974.718A1.92 1.92 0 0 0 3 16H2c0-.616.232-1.367.797-1.968C3.374 13.42 4.261 13 5.5 13c.581 0 .962-.088 1.218-.219.241-.123.4-.3.514-.55.121-.266.193-.621.23-1.09.027-.34.035-.718.037-1.141A3.5 3.5 0 0 1 4 6.5v-3a.5.5 0 0 1 .5-.5h1V.5A.5.5 0 0 1 6 0M5 4v2.5A2.5 2.5 0 0 0 7.5 9h1A2.5 2.5 0 0 0 11 6.5V4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="text-center"><strong>KlikAanUit Schakelaar</strong></h4>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-2">
+                                                <div class="col-md-6">
+                                                    <h6 class="text-center"><strong>Status:</strong></h6>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h6 class="text-center"><strong>Zet aan/uit</strong></h6>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-2">
+                                                <div class="col-md-6">
+                                                    <h6
+                                                        class="text-center text-danger custom-block rounded rounded-3 p-1 ">
+                                                        <strong>Uit</strong>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="text-center toggle-container">
+                                                        <form>
+                                                            <input type="checkbox" class="toggle-input"
+                                                                id="toggle-switch-2">
+                                                            <label for="toggle-switch-2" class="toggle-track">
+                                                                <div class="toggle-thumb"></div>
+                                                            </label>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container mt-3 p-3 custom-bg rounded rounded-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6><strong>Sensor Statussen</strong></h6>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <p class="">DHT Sensor</p>
+                                        </div>
+                                        <div class="status-circle status-success"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <p class="">RF Transmitter</p>
+                                        </div>
+                                        <div class="status-circle status-success"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <p class="">Soil Moisture Meter</p>
+                                        </div>
+                                        <div class="status-circle status-success"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container mt-3 p-3 custom-bg rounded rounded-3">
+                            <div class="container">
+                                <a href="#" class="text-decoration-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000"
+                                        class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5m0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78zM5.048 3.967l-.087.065zm-.431.355A4.98 4.98 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8zm.344 7.646.087.065z" />
+                                    </svg>
+                                </a>
+                                <a href="https://github.com/Mitch0356" class="text-decoration-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000"
+                                        class="bi bi-github" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-auto mb-auto">
+                        <div class="container my-auto">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="progress-container">
+                                        <div class="progress-bar" id="myBar">
+                                            <div class="progress-text" id="progressText">0%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <picture>
+                                        <img src="plant.png" class="img-fluid custom" alt="image desc" />
+                                    </picture>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-3">
+                                    <p class="text-center">Bodem Vochtigheid</p>
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="text-center" id="status"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

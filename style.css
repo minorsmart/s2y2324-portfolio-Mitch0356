@@ -1,0 +1,115 @@
+* {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+
+    border: none;   
+
+}
+
+.btn-nav {
+    position: fixed !important;
+    bottom: 1rem !important;
+    margin-left: 1rem !important;
+}
+
+.gradient-text {
+    background-image: linear-gradient(to right, #12c2e9, #c471ed, #eb4ff670);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.gradient-home {
+    background-image: linear-gradient(to top, #fff1eb 0%, #acf9f864 100%);
+    border: none;
+}
+
+.gradient-home-2 {
+    background-image: linear-gradient(to bottom, #fff1eb 0%, #ace0f9 100%);
+    border: none;
+}
+
+.border-gradient {
+    background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(45deg, #12c2e97f, #f64f5a75) border-box;
+    border: 5px solid transparent;
+    border-radius: 50px;
+}
+
+.border-gradient-2 {
+    background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(45deg, #12c2e9, #f64f59) border-box;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+.border-gradient-inverted {
+    background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(45deg, #f64f59, #12c2e9) border-box;
+    border: 5px solid transparent;
+    border-radius: 50px;
+}
+
+.custom-text-size {
+    font-size: 10vw;
+}
+
+.home-box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 7vw;
+}
+
+.project-box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2vw;
+    margin-top: 8em;
+    margin-bottom: 8em;
+}
+
+.gradient-secondary {
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+}
+
+.gradient-fill {
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59)!important; /* Replace these colors with your desired gradient colors */
+    fill: url(#gradient); /* Reference the gradient ID */
+  }
+  
+  .gradient-fill defs {
+    background: linear-gradient(to bottom right, #ff8a00, #da1b60); /* Replace these colors with your desired gradient colors */
+  }
+  
+  /* Optional: Define the gradient ID for reuse */
+  .gradient-fill defs linearGradient {
+    id: gradient;
+  }
+
+.custom-text-size-medium
+{
+    font-size: 5vw;
+}
+
+.big-text
+{
+    font-size: 100px!important;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

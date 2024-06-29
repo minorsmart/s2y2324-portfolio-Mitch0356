@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <title>Smart Industries | Project</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/project.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <button
+        class="btn-nav btn btn-dark p-3"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#Id1"
+        aria-controls="Id1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          fill="currentColor"
+          class="bi bi-list"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+          />
+        </svg>
+      </button>
+    </header>
+    <div id="navbar-industries"></div>
+    <main>
+      <div
+        class="gradient-home d-flex align-items-center justify-content-center"
+      >
+        <div class="project-box border-gradient w-75">
+          <div class="container">
+            <h1>Smart Project</h1>
+            <div class="row mt-4">
+              <div class="col-md-3 text-center">
+                <img
+                  src="images/altop.png"
+                  class="img-fluid rounded-top"
+                  alt="altop"
+                />
+              </div>
+              <div class="col-md-9">
+                <h4>Altop Products</h4>
+                <p>
+                  Het project van deze minor gaan wij (Tobias, Edin en ik)
+                  uitvoeren bij het bedrijf Altop Products.
+                  <a href="https://www.altopproducts.nl">Altop Products</a>
+                  maakt o.a. innovaties op het gebied van van
+                  bewateringssystemen voor voetbalvelden d.m.v. DrainTalent en
+                  allerlei andere lopende projecten en innovaties.
+                </p>
+                <p>
+                  Op dit moment wil Altop haar capaciteit uitbreiden op het
+                  gebied van de infrastructuur van DrainTalent. Aan ons de
+                  opdracht om te inventariseren waar het systeem op spaak zou
+                  lopen als de digitale infrastructuur zwaarder belast zou
+                  worden.
+                </p>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-9">
+                <h4>Het Draintalent Systeem</h4>
+                <p>
+                  Alles wat wij gaan uitvoeren bij Altop heeft betrekking op het
+                  Draintalent Systeem. Draintalent wordt gebruikt bij
+                  (proffesionele) voetbalclubs om water te ontrekken en toe te
+                  voegen ondergronds. Doormiddel van een speciale techniek is
+                  het mogelijk om ondergronds water te voegen.
+                </p>
+                <p>
+                  Als extra dienst voor de Draintalent biedt Altop een software
+                  product aan in de vorm van een dashboard. Dit dashboard geeft
+                  informatie over de Draintalent unit en bied een interactie met
+                  de HMI.
+                </p>
+                <p>
+                  Onze opdracht was initieel het opzetten van een DDOS 'aanval'
+                  om te testen hoe bestendig het dashboard is tegen dit type
+                  aanval. Nadat hier resultaten uit zijn gekomen, hebben we een
+                  opzet gemaakt voor hoe optimalisaties te behalen zijn.
+                </p>
+              </div>
+              <div class="col-md-3 text-center">
+                <img
+                  src="images/DrainTalent.jpeg"
+                  class="img-fluid rounded-top"
+                  alt="DrainTalent"
+                />
+              </div>
+            </div>
+            <div class="row mt-4">
+              <h3 class="text-center">
+                Dit project is opgedeeld in 4 kern opdrachten:
+              </h3>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-3">
+                <h5 class="text-center">EMQX/Telegraf</h5>
+
+                <div class="image-container mt-2">
+                  <img
+                    src="images/emqx.png"
+                    class="text-center"
+                    alt=""
+                    height="100px"
+                    width="auto"
+                  />
+                </div>
+                <p class="mt-2">
+                  EMQX en Telegraf werden gebruikt om de EMQTT berichten te
+                  vertalen naar een entry in de database. Omdat we nu een
+                  alternatieve database hebben (Timescale), veranderd deze
+                  infrastructuur. In deze verandering is er in plaats van
+                  telegraf nu een NodeJS applicatie gebouwd die alle entries
+                  naar de database afvangt. Deze is configureerbaar en in te
+                  stellen naar eigen voorkeur.
+                </p>
+              </div>
+              <div class="col-md-3">
+                <h5 class="text-center">API en Dashboard</h5>
+                <div class="image-container mt-2">
+                  <img
+                    src="images/nodejs.png"
+                    class=""
+                    alt=""
+                    height="100px"
+                    width="auto"
+                  />
+                </div>
+                <p class="mt-2">
+                  De API wordt gebruikt voor het ophalen van gegevens uit de
+                  database en het verstrekken van authorisatie van de gebruiker.
+                  Binnen deze applicatie zijn er met name veranderingen gemaakt
+                  bij het ophalen van de gegevens. Dit is gedaan om het ophalen
+                  van gegevens sneller te maken. Het Dashboard maakt
+                  uiteindelijk gebruik van het dashboard. De frontend van het
+                  Draintalent Dashboard is geschreven in React. Om de applicatie
+                  soepeler te laten werken, zijn er veranderingen aangebracht
+                  aan hoe de React Componenten samen werken in het dashboard.
+                  Dit heeft voordelen voor onderhoudbaarheid, veiligheid en
+                  snelheid.
+                </p>
+              </div>
+              <div class="col-md-3">
+                <h5 class="text-center">SLA</h5>
+                <div class="image-container mt-2">
+                  <img
+                    src="images/sla.png"
+                    class=""
+                    alt=""
+                    height="100px"
+                    width="auto"
+                  />
+                </div>
+                <p class="mt-2">
+                  Alle deelopdrachten zijn tot nu heel erg gericht op ICT. Om
+                  deze opdracht ook wat meer "Bedrijfskunde" te laten zijn, moet
+                  er ook een opzet geleverd worden van een SLA. In een SLA staat
+                  in ons geval omschreven naar welke eisen software moet voldoen
+                  en functioneren.
+                </p>
+              </div>
+              <div class="col-md-3">
+                <h5 class="text-center">Database</h5>
+                <div class="image-container mt-2">
+                  <img
+                    src="images/timescale.png"
+                    class=""
+                    alt=""
+                    height="100px"
+                    width="auto"
+                  />
+                </div>
+                <p class="mt-2">
+                  In database land is heel veel veranderd door ons als team.
+                  Orgineel werdt er gebruik gemaakt van InfluxDB als database.
+                  Gedurende het testen kwamen we er achter dat deze database
+                  engine een flinke bottleneck opleverde. Om deze redene hebben
+                  we een verandering naar Timescale gerealiseerd. Hierbij hebben
+                  we de InfluxDB geexporteerd, en een custom Rust script
+                  geschreven die alle gegevens importeerd in Timescale. Ook zijn
+                  deze veranderingen doorgevoerd in de front en back-end.
+                </p>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <h3 class="text-center">Eindproduct</h3>
+              <div class="row">
+                <div class="col-md-6 mt-2">
+                  <h5 class="text-center">SLA en Prototype</h5>
+                  <p>
+                    Als eindproduct leveren wij Code op die een Prototype maakt.
+                    We hebben deze code gerealiseerd naar de resultaten die uit
+                    het onderzoek kwamen dat we hebben gedaan naar wat de
+                    capaciteit is van het Draintalent Dashboard. Ten tweede
+                    leveren wij een SLA (Service Level Agreement) die gebruikt
+                    kan worden als opzet voor het Draintalent Systeem. In dit
+                    document staat beschreven aan voor eisen het systeem moet
+                    voldoen en wat de eindgebruiker kan verwachten van het
+                    Draintalent Dashboard
+                  </p>
+                </div>
+                <div class="col-md-6 mt-2">
+                  <h5 class="text-center">Verslaglegging en Onderzoek</h5>
+                  <p>
+                    De kern van deze opdracht was een onderzoek naar de
+                    capaciteit van het Draintalent systeem. In dit onderzoek
+                    staat vermeld waar de pijnpunten liggen. Op basis van dit
+                    onderzoek zijn we verder gegaan met het creeren van een
+                    prototype.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
